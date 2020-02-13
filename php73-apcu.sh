@@ -13,26 +13,17 @@ then
   yum-config-manager --enable remi-php73
 fi
 
-if ! is_installed scl-utils;
+if ! yum list installed "scl-utils" >/dev/null 2>&1
 then
   yum install -y https://rpmfind.net/linux/centos/7.7.1908/os/x86_64/Packages/scl-utils-20130529-19.el7.x86_64.rpm
 fi
 
-if ! is_installed libedit;
+if ! yum list installed "libedit" >/dev/null 2>&1
 then
   yum install -y https://rpmfind.net/linux/centos/7.7.1908/os/x86_64/Packages/libedit-3.0-12.20121213cvs.el7.x86_64.rpm
 fi
 
-if ! is_installed php73-php-pecl-apcu;
+if ! yum list installed "php73-php-pecl-apcu" >/dev/null 2>&1
 then
   yum install -y php73-php-pecl-apcu
 fi
-
-#-------------------------- Functions --------------------------------
-is_installed() {
-  if yum list installed "$@" >/dev/null 2>&1; then
-    true
-  else
-    false
-  fi
-}
